@@ -12,13 +12,36 @@ function Menu:enter()
     self.selected = 1
     
     -- Background color
-    self.bg_color = {0, 0, 0, 0}
+    self.bg_color = {0.05, 0.05, 0.1, 1}
+    -- self.bg_color = {0, 0, 0, 0}
     -- self.bg_color = {0.1, 0.1, 0.2, 1}
     
     -- Menu animation
     self.time = 0
     self.pulse = 0
+
+    -- Load Sounds
+    self.sounds = {
+        -- menu_music = love.audio.newSource("assets/music/menu_music.ogg", "stream"),
+        sfx_move = love.audio.newSource("assets/sfx/sfx_move.wav", "static"),
+        sfx_click = love.audio.newSource("assets/sfx/sfx_click.wav", "static"),
+        sfx_start = love.audio.newSource("assets/sfx/sfx_start.wav", "static"),
+    }
+
+    -- Play background music
+    -- self.sounds.menu_music:setLooping(true)
+    -- self.sounds.menu_music:setVolume(0.7)
+    -- self.playSound(self.sounds.menu_music)
 end
+
+-- Helper function to play sound effects and to make sure they don't overlap
+function Menu:playSound(sound)
+    if sound then
+        sound:stop()
+        love.audio.play(sound)
+    end
+end
+
 
 function Menu:update(dt)
     self.time = self.time + dt
@@ -69,23 +92,36 @@ function Menu:keypressed(key)
         if self.selected < 1 then
             self.selected = #self.options
         end
+        self:playSound(self.sounds.sfx_move)
     elseif key == "down" then
         self.selected = self.selected + 1
         if self.selected > #self.options then
             self.selected = 1
         end
+        self:playSound(self.sounds.sfx_move)
     elseif key == "return" or key == "space" then
         if self.selected == 1 then
+            self:playSound(self.sounds.sfx_start)
             -- Start Game
             print("Starting game...")
+            -- love.audio.stop(self.sounds.menu_music)
         elseif self.selected == 2 then
+            self:playSound(self.sounds.sfx_click)
             -- Settings
-            print("Settings not implemented yet")
+            local Settings = require('src.states.settings')
+            GameState.switch(Settings)
         elseif self.selected == 3 then
+            self:playSound(self.sounds.sfx_click)
             -- Exit
             love.event.quit()
         end
     end
+end
+
+function Menu:exit()
+    -- if self.sounds.menu_music:isPlaying() then
+    --     love.audio.stop(self.sounds.menu_music)
+    -- end
 end
 
 return Menu

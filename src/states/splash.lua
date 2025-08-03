@@ -39,7 +39,7 @@ end
 
 function Splash:draw()
     -- Clear the screen
-    love.graphics.clear(0, 0, 0, 1)
+    love.graphics.clear(0.05, 0.05, 0.1, 1)
     love.graphics.setColor(1, 1, 1, self.alpha)
 
     -- Draw dev name
