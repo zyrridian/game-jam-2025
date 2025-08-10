@@ -6,9 +6,9 @@ function GameState.switch(state, ...)
     if GameState.current and GameState.current.exit then
         GameState.current:exit()
     end
-    
+
     GameState.current = state
-    
+
     if state.enter then
         state:enter(...)
     end
