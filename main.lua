@@ -1,10 +1,11 @@
 local GameState = require('src.states.gamestate')
 local Splash = require('src.states.splash')
+local Menu = require('src.states.menu')
 
 function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest')
     math.randomseed(os.time())
-    GameState.switch(Splash)
+    GameState.switch(Menu)
 end
 
 function love.update(dt)

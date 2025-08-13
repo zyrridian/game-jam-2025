@@ -57,9 +57,9 @@ function Player:moveTo(tileX, tileY, game)
     --     canMove = game:canMoveTo(tileX, tileY)
     -- else
     -- Fallback boundary check
-    if tileX < 1 or tileX > game.mapWidth or tileY < 1 or tileY > game.mapHeight then
-        canMove = false
-    end
+    -- if tileX < 1 or tileX > game.mapWidth or tileY < 1 or tileY > game.mapHeight then
+    --     canMove = false
+    -- end
     -- end
 
     if canMove then
@@ -149,9 +149,9 @@ function Player:update(dt, tilemap)
     self:handleInput(dt, tilemap)
 end
 
-function Player:draw(camX, camY)
-    local x = self.x - camX
-    local y = self.y - camY
+function Player:draw()
+    local x = self.x
+    local y = self.y
 
     local yOffset = 0
     if self.moving then
