@@ -24,10 +24,10 @@ function Splash:update(dt)
     -- Fade in
     if self.timer < self.fade_in then
         self.alpha = self.timer / self.fade_in
-    -- Delay (3 seconds)
+        -- Delay (3 seconds)
     elseif self.timer < self.duration - self.fade_out then
         self.alpha = 1
-    -- Fade out
+        -- Fade out
     elseif self.timer < self.duration then
         local fade_time = self.timer - (self.duration - self.fade_out)
         self.alpha = 1 - (fade_time / self.fade_out)
@@ -39,7 +39,7 @@ end
 
 function Splash:draw()
     -- Clear the screen
-    love.graphics.clear(0, 0, 0, 1)
+    love.graphics.clear(0.05, 0.05, 0.1, 1)
     love.graphics.setColor(1, 1, 1, self.alpha)
 
     -- Draw dev name
@@ -47,9 +47,9 @@ function Splash:draw()
     local height = love.graphics.getHeight()
 
     love.graphics.setFont(self.font_large)
-    love.graphics.printf(self.dev_name, 0, height/2-50, width, "center")
+    love.graphics.printf(self.dev_name, 0, height / 2 - 50, width, "center")
     love.graphics.setFont(self.font_small)
-    love.graphics.printf(self.dev_title, 0, height/2+10, width, "center")
+    love.graphics.printf(self.dev_title, 0, height / 2 + 10, width, "center")
 
     -- Reset color
     love.graphics.setColor(1, 1, 1, 1)
